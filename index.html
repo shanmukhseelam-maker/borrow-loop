@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Borrow Loop | Share More, Buy Less</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #4A6741;
+            --light-sage: #F2F5F1;
+            --charcoal: #2D3436;
+            --white: #FFFFFF;
+            --accent: #D4A373;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-sage);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            padding: 1.5rem 10%;
+            background: var(--white);
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            letter-spacing: -1px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--charcoal);
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--primary-green); }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 10%;
+            text-align: center;
+            background: linear-gradient(to bottom, #ffffff, #f2f5f1);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--charcoal);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #636e72;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn-main {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+
+        .btn-main:hover { transform: translateY(-3px); }
+
+        /* Listing Grid */
+        .container {
+            padding: 4rem 10%;
+        }
+
+        .section-title {
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Item Cards */
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: 0.3s;
+            border: 1px solid #e0e0e0;
+        }
+
+        .card:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
+
+        .card-img {
+            height: 200px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-price {
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            font-size: 0.8rem;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">BORROW LOOP.</div>
+        <div class="nav-links">
+            <a href="#">Browse</a>
+            <a href="#">How it works</a>
+            <a href="#">List an Item</a>
+            <a href="#" style="font-weight: 600; color: var(--primary-green);">Login</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Own less. Do more.</h1>
+        <p>Access high-quality tools, gear, and equipment from trusted neighbors in your local community.</p>
+        <a href="#" class="btn-main">Start Exploring</a>
+    </header>
+
+    <main class="container">
+        <h2 class="section-title">Available in your area</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-img">📸 Image: Power Drill</div>
+                <div class="card-content">
+                    <span class="card-tag">DIY & Tools</span>
+                    <h3 class="card-title">DeWalt Cordless Drill</h3>
+                    <p class="card-price">$5 / day</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">📸 Image: Camping Tent</div>
+                <div class="card-content">
+                    <span class="card-tag">Outdoors</span>
+                    <h3 class="card-title">4-Person North Face Tent</h3>
+                    <p class="card-price">$12 / day</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">📸 Image: Stand Mixer</div>
+                <div class="card-content">
+                    <span class="card-tag">Kitchen</span>
+                    <h3 class="card-title">KitchenAid Artisan Mixer</h3>
+                    <p class="card-price">$8 / day</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 The Borrow Loop. Built for a sustainable future.
+    </footer>
+
+</body>
+</html>
