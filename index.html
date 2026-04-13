@@ -1,74 +1,215 @@
-<body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Borrow Loop</title>
+    <meta
+      name="description"
+      content="The Borrow Loop is a hyperlocal borrowing marketplace where neighbors share high-value items, save money, and reduce waste."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar reveal">
+        <a class="brand" href="#hero" aria-label="The Borrow Loop home">
+          <span class="brand-mark">BL</span>
+          <span class="brand-text">The Borrow Loop</span>
+        </a>
+        <nav class="nav">
+          <a href="#how-it-works">How it works</a>
+          <a href="#why-now">Why now</a>
+          <a href="#trust">Trust</a>
+        </nav>
+        <a class="button button-ghost" href="#waitlist">Join waitlist</a>
+      </header>
 
-    <nav class="navbar">
-        <div class="logo">BORROW LOOP.</div>
-        <div class="nav-links">
-            <a href="#">Browse</a>
-            <a href="#">How it works</a>
-            <a href="#">List an Item</a>
-            <a href="#" style="font-weight: 600; color: var(--primary-green);">Login</a>
-        </div>
-    </nav>
+      <main>
+        <section class="hero reveal" id="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">Hyperlocal sharing for a practical 2026</p>
+            <h1>Borrow what you need. Keep ownership in the neighborhood.</h1>
+            <p class="hero-text">
+              The Borrow Loop helps neighbors rent out rarely used, high-value
+              items for a tiny fee. Fewer one-time purchases. Less waste. More
+              trust, more savings, and stronger local connections.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#waitlist">Request early access</a>
+              <a class="button button-secondary" href="#how-it-works">See the model</a>
+            </div>
+            <div class="hero-points">
+              <span>Low-cost access</span>
+              <span>Built for neighbors</span>
+              <span>Designed to reduce waste</span>
+            </div>
+          </div>
 
-    <header class="hero">
-        <h1>Own less. Do more.</h1>
-        <p>Access high-quality tools and gear from trusted neighbors for a fraction of the retail price.</p>
-        <a href="#" class="btn-main">Start Exploring</a>
-    </header>
-
-    <main class="container">
-        <h2 class="section-title">Trending in your neighborhood</h2>
-        <div class="grid">
-            
-            <div class="card">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1592419044706-39796d40f98c?auto=format&fit=crop&q=80&w=400" alt="Lawnmower" style="width:100%; height:100%; object-fit:cover;">
-                </div>
-                <div class="card-content">
-                    <span class="card-tag">Garden</span>
-                    <h3 class="card-title">Self-Propelled Gas Mower</h3>
-                    <p class="card-price">$15 / day <span style="font-size: 0.8rem; font-weight: 400; color: #999;">(Market: $45)</span></p>
-                </div>
+          <div class="hero-panel" aria-label="Borrow Loop marketplace preview">
+            <div class="panel-card panel-search">
+              <div>
+                <p class="label">Find what you need</p>
+                <h2 id="search-rotator">Power drill</h2>
+              </div>
+              <span class="pill">Within 0.8 miles</span>
             </div>
 
-            <div class="card">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1589715560411-9f93933c0692?auto=format&fit=crop&q=80&w=400" alt="Pressure Washer" style="width:100%; height:100%; object-fit:cover;">
+            <div class="item-grid">
+              <article class="panel-card item-card">
+                <div class="item-icon amber"></div>
+                <div>
+                  <p class="label">Most borrowed</p>
+                  <h3>Weekend tent kit</h3>
+                  <p class="item-meta">$9/day • Verified owner</p>
                 </div>
-                <div class="card-content">
-                    <span class="card-tag">Cleaning</span>
-                    <h3 class="card-title">High-PSI Power Washer</h3>
-                    <p class="card-price">$18 / day <span style="font-size: 0.8rem; font-weight: 400; color: #999;">(Market: $90)</span></p>
+              </article>
+
+              <article class="panel-card item-card">
+                <div class="item-icon green"></div>
+                <div>
+                  <p class="label">Kitchen favorite</p>
+                  <h3>Pro blender</h3>
+                  <p class="item-meta">$6/day • Pickup tonight</p>
                 </div>
+              </article>
+
+              <article class="panel-card item-card wide">
+                <div class="item-icon blue"></div>
+                <div>
+                  <p class="label">Neighborhood impact</p>
+                  <h3>238 items shared instead of bought</h3>
+                  <p class="item-meta">
+                    Lower household costs and a lighter footprint across one
+                    local community.
+                  </p>
+                </div>
+              </article>
             </div>
+          </div>
+        </section>
 
-            <div class="card">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&q=80&w=400" alt="Carpet Cleaner" style="width:100%; height:100%; object-fit:cover;">
-                </div>
-                <div class="card-content">
-                    <span class="card-tag">Home Care</span>
-                    <h3 class="card-title">Pro Deep-Carpet Cleaner</h3>
-                    <p class="card-price">$12 / day <span style="font-size: 0.8rem; font-weight: 400; color: #999;">(Market: $40)</span></p>
-                </div>
-            </div>
+        <section class="stats reveal" aria-label="Borrow Loop highlights">
+          <article>
+            <strong>70%</strong>
+            <span>of listed items are things people normally buy for one use</span>
+          </article>
+          <article>
+            <strong>2 mins</strong>
+            <span>to reserve, confirm pickup, and pay through the app</span>
+          </article>
+          <article>
+            <strong>Local-first</strong>
+            <span>so every transaction stays inside a real neighborhood loop</span>
+          </article>
+        </section>
 
-            <div class="card">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1516592231412-1662580790e8?auto=format&fit=crop&q=80&w=400" alt="Ladder" style="width:100%; height:100%; object-fit:cover;">
-                </div>
-                <div class="card-content">
-                    <span class="card-tag">Maintenance</span>
-                    <h3 class="card-title">24ft Extension Ladder</h3>
-                    <p class="card-price">$8 / day <span style="font-size: 0.8rem; font-weight: 400; color: #999;">(Market: $35)</span></p>
-                </div>
-            </div>
+        <section class="section reveal" id="how-it-works">
+          <div class="section-heading">
+            <p class="eyebrow">Simple by design</p>
+            <h2>A marketplace that feels more like a helpful neighbor than a classifieds board.</h2>
+          </div>
+          <div class="steps">
+            <article class="step-card">
+              <span class="step-number">01</span>
+              <h3>List once</h3>
+              <p>
+                Add the tools, appliances, gear, or party extras you already own
+                and rarely use.
+              </p>
+            </article>
+            <article class="step-card">
+              <span class="step-number">02</span>
+              <h3>Borrow nearby</h3>
+              <p>
+                Search by category, distance, and pickup window to find what is
+                already close to home.
+              </p>
+            </article>
+            <article class="step-card">
+              <span class="step-number">03</span>
+              <h3>Loop it back</h3>
+              <p>
+                Tiny fees reward owners, reviews build trust, and every return
+                keeps value circulating locally.
+              </p>
+            </article>
+          </div>
+        </section>
 
-        </div>
-    </main>
+        <section class="section split reveal" id="why-now">
+          <div class="section-heading compact">
+            <p class="eyebrow">Why now</p>
+            <h2>Built for a climate where every dollar, purchase, and square foot matters.</h2>
+            <p>
+              Sustainability, price sensitivity, and community-minded behavior
+              are converging. The Borrow Loop turns those pressures into a clean,
+              useful habit.
+            </p>
+          </div>
+          <div class="reason-grid">
+            <article class="reason-card">
+              <h3>Save instead of stockpile</h3>
+              <p>Access a $200 tool for a few dollars instead of storing it forever.</p>
+            </article>
+            <article class="reason-card">
+              <h3>Waste less</h3>
+              <p>More re-use means fewer duplicate purchases and less material churn.</p>
+            </article>
+            <article class="reason-card">
+              <h3>Know who you borrow from</h3>
+              <p>Profiles, reviews, and local identity cues keep the experience grounded.</p>
+            </article>
+            <article class="reason-card accent">
+              <p class="label">Borrow Loop promise</p>
+              <h3>Minimalist, trustworthy, earth-friendly.</h3>
+              <p>The product aesthetic mirrors the behavior it encourages: clean, calm, and practical.</p>
+            </article>
+          </div>
+        </section>
 
-    <footer>
-        &copy; 2026 The Borrow Loop. Saving you money, one project at a time.
-    </footer>
+        <section class="section trust reveal" id="trust">
+          <div class="section-heading compact">
+            <p class="eyebrow">Trust mechanics</p>
+            <h2>Designed to feel safe enough for real neighborhoods.</h2>
+          </div>
+          <div class="trust-grid">
+            <article class="trust-card">
+              <h3>Verified identities</h3>
+              <p>Every member confirms who they are before listing or borrowing.</p>
+            </article>
+            <article class="trust-card">
+              <h3>Deposits for premium items</h3>
+              <p>Higher-value gear gets lightweight protection without slowing down access.</p>
+            </article>
+            <article class="trust-card">
+              <h3>Mutual reviews</h3>
+              <p>Trust compounds over time and helps great borrowers and owners stand out.</p>
+            </article>
+          </div>
+        </section>
 
-</body>
+        <section class="waitlist reveal" id="waitlist">
+          <div class="waitlist-copy">
+            <p class="eyebrow">Launch interest</p>
+            <h2>Start with one block, then one neighborhood, then the whole loop.</h2>
+            <p>
+              Early members shape how Borrow Loop handles pickup etiquette, trust
+              signals, and the most useful first categories.
+            </p>
+          </div>
+          <form class="waitlist-form">
+            <label for="email" class="sr-only">Email address</label>
+            <input id="email" name="email" type="email" placeholder="Email address" />
+            <label for="zip" class="sr-only">ZIP code</label>
+            <input id="zip" name="zip" type="text" placeholder="ZIP code" />
+            <button type="submit" class="button button-primary">Request invite</button>
+            <p class="form-note" aria-live="polite">Invite requests open for the first neighborhood pilot.</p>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
