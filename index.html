@@ -1,506 +1,71 @@
 
-    />
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body data-page="home">
-  <body data-page="home" id="top">
-    <div class="site-shell">
-      <header class="site-header reveal">
-        <a class="brand" href="./index.html" aria-label="Borrow Loop home">
-        <a class="brand" href="#top" aria-label="Borrow Loop home">
-          <span class="brand-mark">BL</span>
-          <span>
-            <strong>The Borrow Loop</strong>
-          </span>
-        </a>
-        <nav class="site-nav" aria-label="Primary">
-          <a href="./index.html">Home</a>
-          <a href="./browse.html">Browse</a>
-          <a href="./how-it-works.html">How it Works</a>
-          <a href="./list-item.html">List an Item</a>
-          <a href="./dashboard.html">Dashboard</a>
-          <a href="./support.html">Support</a>
-          <a href="#top">Home</a>
-          <a href="#browse-section">Browse</a>
-          <a href="#list-section">List an Item</a>
-          <a href="#dashboard-section">Dashboard</a>
-          <a href="#how-it-works-section">How it Works</a>
-          <a href="#support-section">Support</a>
-        </nav>
-        <div class="header-actions">
-          <a class="button button-secondary" href="./browse.html">Explore items</a>
-          <a class="button button-primary" href="./list-item.html">Start lending</a>
-          <a class="button button-secondary" href="#browse-section">Explore items</a>
-          <a class="button button-primary" href="#list-section">Start lending</a>
-        </div>
-      </header>
+  } catch (error) {
+    state.apiOnline = false;
+    state.apiError =
+      "Backend unavailable. Set the API URL in config.js and deploy the backend service.";
+      "Backend unavailable. Add your API URL inside index.html and deploy the backend service.";
+    throw new Error(state.apiError);
+  }
 
-              built around trust, savings, and less waste.
-            </p>
-            <div class="button-row">
-              <a class="button button-primary" href="./browse.html">Browse nearby items</a>
-              <a class="button button-ghost" href="./how-it-works.html">See how it works</a>
-              <a class="button button-primary" href="#browse-section">Browse nearby items</a>
-              <a class="button button-ghost" href="#how-it-works-section">See how it works</a>
-            </div>
-            <div class="mini-stats">
-              <span><strong>4.9/5</strong> community trust rating</span>
-          <div class="listing-grid" id="featured-grid"></div>
-        </section>
+}
 
-        <section class="section two-column reveal">
-          <div class="section-heading compact">
-            <p class="eyebrow">Why customers like it</p>
-            <h2>A marketplace that feels calm, reliable, and useful from the first click.</h2>
-            <p class="muted">
-              Borrowers can search fast, compare trust signals, and request items
-              without bouncing around. Lenders can list things in minutes and
-              manage demand from one dashboard.
-            </p>
-        <section class="section reveal" id="browse-section">
-          <div class="page-hero">
-            <div>
-              <p class="eyebrow">Browse the marketplace</p>
-              <h2>Find useful things already living nearby.</h2>
-              <p class="lead">
-                Search by category, compare trust signals, and request the item you
-                need without overspending or overbuying.
-              </p>
-            </div>
-            <aside class="hero-side">
-              <p class="eyebrow">Customer shortcut</p>
-              <h3 id="result-count">Loading items...</h3>
-              <p class="muted">
-                Save what you like, then open your dashboard below to track requests
-                and favorites.
-              </p>
-            </aside>
-          </div>
+function setupActiveNav() {
+  const page = document.body.dataset.page;
+  const navLinks = document.querySelectorAll(".site-nav a");
+  navLinks.forEach((link) => {
+    const href = link.getAttribute("href") || "";
+    if (
+      (page === "home" && href.includes("index.html")) ||
+      (page !== "home" && href.includes(`${page}.html`))
+    ) {
+      link.classList.add("active");
+  const navLinks = Array.from(document.querySelectorAll('.site-nav a[href^="#"]'));
+  if (!navLinks.length) {
+    return;
+  }
 
-          <div class="filter-bar reveal">
-            <div class="filter-grid">
-              <div class="filter-group">
-                <label for="search-input">Search</label>
-                <input id="search-input" type="text" placeholder="Drill, tent, projector..." />
-              </div>
-              <div class="filter-group">
-                <label for="category-input">Category</label>
-                <select id="category-input">
-                  <option value="">All categories</option>
-                  <option value="Tools">Tools</option>
-                  <option value="Kitchen">Kitchen</option>
-                  <option value="Outdoor">Outdoor</option>
-                  <option value="Cleaning">Cleaning</option>
-                  <option value="Events">Events</option>
-                  <option value="Garden">Garden</option>
-                </select>
-              </div>
-              <div class="filter-group">
-                <label for="sort-input">Sort by</label>
-                <select id="sort-input">
-                  <option value="distance">Closest first</option>
-                  <option value="price">Lowest price</option>
-                  <option value="rating">Highest rated</option>
-                </select>
-              </div>
-            </div>
-          </div>
+  const sections = navLinks
+    .map((link) => {
+      const href = link.getAttribute("href");
+      if (!href) {
+        return null;
+      }
 
-          <div class="listing-grid reveal" id="browse-grid"></div>
-        </section>
+      const section = document.querySelector(href);
+      return section ? { link, href, section } : null;
+    })
+    .filter(Boolean);
 
-        <section class="section reveal" id="item-detail-section">
-          <div class="section-heading">
-            <p class="eyebrow">Item detail</p>
-            <h2 id="item-page-title">Borrow Loop item</h2>
-            <p class="muted">Review pickup and trust details, then request the item instantly.</p>
-          </div>
-          <div class="detail-layout" id="item-detail"></div>
-          <div class="section" style="padding-top: 36px">
-            <div class="section-heading compact">
-              <p class="eyebrow">More nearby</p>
-              <h2>Other useful options in the loop.</h2>
-            </div>
-            <div class="related-grid" id="related-grid"></div>
-          </div>
-        </section>
+  function updateActiveLink() {
+    if (!sections.length) {
+      return;
+    }
 
-        <section class="section reveal" id="dashboard-section">
-          <div class="page-hero">
-            <div>
-              <p class="eyebrow">Customer dashboard</p>
-              <h2>One place for favorites, requests, and your own listings.</h2>
-              <p class="lead">
-                This dashboard now works through a shared backend account, so the
-                same email can load the same data on another device.
-              </p>
-            </div>
-            <aside class="hero-side">
-              <p class="eyebrow">Shared account</p>
-              <p class="muted">
-                Create or load your account here, then your saves, requests, and
-                listings will stay attached to that profile.
-              </p>
-            </aside>
-          </div>
+    const currentHash = window.location.hash;
+    let activeEntry = sections[0];
+    const scrollMarker = window.scrollY + 160;
 
-          <div class="dashboard-layout">
-            <aside class="feature-panel">
-              <div class="section-heading compact">
-                <p class="eyebrow">Account access</p>
-                <h2>Create or load your profile</h2>
-              </div>
-              <form id="account-form">
-                <div class="form-group">
-                  <label for="account-name">Name</label>
-                  <input id="account-name" name="name" type="text" placeholder="Taylor P." />
-                </div>
-                <div class="form-group">
-                  <label for="account-email">Email</label>
-                  <input id="account-email" name="email" type="email" placeholder="taylor@example.com" />
-                </div>
-                <div class="form-group">
-                  <label for="account-zip">ZIP code</label>
-                  <input id="account-zip" name="zip" type="text" placeholder="11217" />
-                </div>
-                <div class="inline-actions">
-                  <button class="button button-primary" type="submit">Save account</button>
-                  <button class="button button-secondary" type="button" id="sign-out-button">Sign out</button>
-                </div>
-              </form>
-              <p class="message" id="account-feedback">Create your account to sync data across browsers.</p>
-              <div id="current-account" class="empty-state">No account connected yet.</div>
-            </aside>
+    sections.forEach((entry) => {
+      if (entry.section.offsetTop <= scrollMarker) {
+        activeEntry = entry;
+      }
+    });
 
-            <section class="dashboard-summary" id="dashboard-summary">
-              <div class="empty-state">Connect an account to load your shared dashboard.</div>
-            </section>
-          </div>
+    if (currentHash) {
+      const hashEntry = sections.find((entry) => entry.href === currentHash);
+      if (hashEntry) {
+        activeEntry = hashEntry;
+      }
+    }
+  });
 
-          <div class="dashboard-grid" style="margin-top: 24px">
-            <article class="table-card">
-              <div class="section-heading compact">
-                <p class="eyebrow">Saved items</p>
-                <h2>Items you want to revisit</h2>
-              </div>
-              <div id="saved-items"></div>
-            </article>
+    navLinks.forEach((link) => link.classList.remove("active"));
+    activeEntry.link.classList.add("active");
+  }
 
-            <article class="table-card">
-              <div class="section-heading compact">
-                <p class="eyebrow">Requests</p>
-                <h2>Borrow requests you started</h2>
-              </div>
-              <div id="bookings"></div>
-            </article>
+  window.addEventListener("scroll", updateActiveLink, { passive: true });
+  window.addEventListener("hashchange", updateActiveLink);
+  updateActiveLink();
+}
 
-            <article class="table-card">
-              <div class="section-heading compact">
-                <p class="eyebrow">Your listings</p>
-                <h2>Items you published</h2>
-              </div>
-              <div id="your-listings"></div>
-            </article>
-          </div>
-        </section>
-
-        <section class="section reveal" id="list-section">
-          <div class="page-hero">
-            <div>
-              <p class="eyebrow">Lender setup</p>
-              <h2>Turn a rarely used item into a helpful neighborhood resource.</h2>
-              <p class="lead">
-                Add pricing, pickup notes, and a short description. Your listing
-                will appear in the marketplace immediately and also show up in your dashboard.
-              </p>
-            </div>
-            <aside class="hero-side">
-              <p class="eyebrow">Good first listings</p>
-              <div class="detail-highlights">
-                <span class="chip">Tools</span>
-                <span class="chip">Kitchen gear</span>
-                <span class="chip">Party extras</span>
-                <span class="chip">Camping gear</span>
-              </div>
-            </aside>
-          </div>
-
-          <div class="form-layout">
-            <form class="form-card" id="listing-form">
-              <div class="section-heading compact">
-                <p class="eyebrow">Listing form</p>
-                <h2>Publish a new item</h2>
-              </div>
-              <div class="form-grid">
-                <div class="form-group">
-                  <label for="title">Item title</label>
-                  <input id="title" name="title" type="text" placeholder="Cordless tile saw" />
-                </div>
-                <div class="form-group">
-                  <label for="category">Category</label>
-                  <select id="category" name="category">
-                    <option value="">Choose one</option>
-                    <option value="Tools">Tools</option>
-                    <option value="Kitchen">Kitchen</option>
-                    <option value="Outdoor">Outdoor</option>
-                    <option value="Cleaning">Cleaning</option>
-                    <option value="Events">Events</option>
-                    <option value="Garden">Garden</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="price">Daily price</label>
-                  <input id="price" name="price" type="number" min="1" placeholder="10" />
-                </div>
-                <div class="form-group">
-                  <label for="city">Neighborhood or city</label>
-                  <input id="city" name="city" type="text" placeholder="Fort Greene" />
-                </div>
-                <div class="form-group">
-                  <label for="pickup">Pickup window</label>
-                  <input id="pickup" name="pickup" type="text" placeholder="Weekdays after 5 PM" />
-                </div>
-                <div class="form-group full">
-                  <label>Account owner</label>
-                  <div class="empty-state">
-                    This listing will use the name from the account you loaded in the dashboard.
-                  </div>
-                </div>
-                <div class="form-group full">
-                  <label for="description">Description</label>
-                  <textarea
-                    id="description"
-                    name="description"
-                    placeholder="Add what is included, condition, and what kind of borrower this is best for."
-                  ></textarea>
-                </div>
-              </div>
-              <div class="inline-actions">
-                <button class="button button-primary" type="submit">Publish listing</button>
-                <a class="button button-secondary" href="#browse-section">See marketplace</a>
-              </div>
-              <p class="message" id="listing-feedback">Your listing will appear here once submitted.</p>
-            </form>
-
-            <aside class="feature-panel">
-              <p class="eyebrow">What makes a strong listing</p>
-              <div class="steps-grid">
-                <article class="step-card">
-                  <h3>Be specific</h3>
-                  <p>Say what is included so borrowers know they do not need extra parts.</p>
-                </article>
-                <article class="step-card">
-                  <h3>Set a simple price</h3>
-                  <p>Low-friction prices get more requests and feel neighborly.</p>
-                </article>
-                <article class="step-card">
-                  <h3>Share pickup windows</h3>
-                  <p>Clarity makes the experience easier for both sides.</p>
-                </article>
-              </div>
-            </aside>
-          </div>
-        </section>
-
-        <section class="section reveal" id="how-it-works-section">
-          <div class="page-hero">
-            <div>
-              <p class="eyebrow">How it works</p>
-              <h2>A simple loop for borrowing, lending, and wasting less.</h2>
-              <p class="lead">
-                Borrow Loop is designed to feel straightforward for both customers and lenders.
-              </p>
-            </div>
-            <aside class="hero-side">
-              <p class="eyebrow">Core promise</p>
-              <p class="muted">
-                Trust-based borrowing with real-world convenience and a cleaner economic model than buying everything new.
-              </p>
-            </aside>
-          </div>
-          <div class="feature-grid">
-            <article class="feature-card">
-              <h3>Browse nearby</h3>
-              <p>Filter by category, price, or distance to find the closest useful option.</p>
-
-          <div class="steps-grid">
-            <article class="step-card">
-              <p class="eyebrow">Step 1</p>
-              <h3>Browse or search</h3>
-              <p>Customers start on the marketplace and filter by what they need, where they are, and what they want to spend.</p>
-            </article>
-            <article class="step-card">
-              <p class="eyebrow">Step 2</p>
-              <h3>Review trust signals</h3>
-              <p>Each listing shows neighborhood distance, ratings, pickup notes, and verification language.</p>
-            </article>
-            <article class="step-card">
-              <p class="eyebrow">Step 3</p>
-              <h3>Request an item</h3>
-              <p>A customer can request to borrow in one click and keep that request in the dashboard.</p>
-            </article>
-            <article class="feature-card">
-              <h3>Save favorites</h3>
-              <p>Keep a shortlist of items you may want for future projects or weekends.</p>
-            <article class="step-card">
-              <p class="eyebrow">Step 4</p>
-              <h3>Pickup locally</h3>
-              <p>The owner coordinates pickup through the listed window, reducing shipping, packaging, and waste.</p>
-            </article>
-            <article class="feature-card">
-              <h3>List with confidence</h3>
-              <p>Add pricing, pickup notes, and condition details in one simple flow.</p>
-            <article class="step-card">
-              <p class="eyebrow">Step 5</p>
-              <h3>Return and repeat</h3>
-              <p>The item goes back into the loop so the next neighbor can use it too.</p>
-            </article>
-            <article class="feature-card">
-              <h3>Manage activity</h3>
-              <p>Track your saved items, requests, and community listings in one place.</p>
-            <article class="step-card">
-              <p class="eyebrow">Step 6</p>
-              <h3>List your own extras</h3>
-              <p>Owners can add their own underused items and create more value inside the same community.</p>
-            </article>
-          </div>
-        </section>
-
-        <section class="section reveal" id="support-section">
-          <div class="page-hero">
-            <div>
-              <p class="eyebrow">Support center</p>
-              <h2>Answers first, contact when you need it.</h2>
-              <p class="lead">
-                Customers and lenders both get a simple FAQ plus a contact form that submits to the backend.
-              </p>
-            </div>
-            <aside class="hero-side">
-              <p class="eyebrow">Fast answers</p>
-              <div class="detail-highlights">
-                <span class="chip">Trust</span>
-                <span class="chip">Pickups</span>
-                <span class="chip">Pricing</span>
-                <span class="chip">Listings</span>
-              </div>
-            </aside>
-          </div>
-
-          <div class="support-layout">
-            <div class="faq-grid">
-              <article class="faq-card">
-                <h3>How do I know a listing is trustworthy?</h3>
-                <p>Each item shows a lender badge, rating, pickup notes, and trust policy before you request it.</p>
-              </article>
-              <article class="faq-card">
-                <h3>Can I save items for later?</h3>
-                <p>Yes. Any saved item appears in your dashboard so you can come back when you need it.</p>
-              </article>
-              <article class="faq-card">
-                <h3>What happens when I request a borrow?</h3>
-                <p>The request is stored in your dashboard and synced through the backend account you load.</p>
-              </article>
-              <article class="faq-card">
-                <h3>Can I create my own listing?</h3>
-                <p>Yes. Use the listing form above and your new listing will appear immediately in the marketplace and dashboard.</p>
-              </article>
-              <article class="faq-card">
-                <h3>Does this site keep data?</h3>
-                <p>Yes. Shared data now comes from the backend when your API is connected.</p>
-              </article>
-              <article class="faq-card">
-                <h3>Is Borrow Loop aimed at sustainability?</h3>
-                <p>Yes. The product is designed to cut duplicate purchases and keep value circulating through local neighborhoods.</p>
-              </article>
-            </div>
-
-            <aside class="contact-card">
-              <div class="section-heading compact">
-                <p class="eyebrow">Contact support</p>
-                <h2>Send a message</h2>
-              </div>
-              <form id="support-form">
-                <div class="form-group">
-                  <label for="support-name">Name</label>
-                  <input id="support-name" name="name" type="text" placeholder="Alex P." />
-                </div>
-                <div class="form-group">
-                  <label for="support-email">Email</label>
-                  <input id="support-email" name="email" type="email" placeholder="alex@email.com" />
-                </div>
-                <div class="form-group">
-                  <label for="support-topic">Topic</label>
-                  <select id="support-topic" name="topic">
-                    <option value="Borrowing">Borrowing</option>
-                    <option value="Listing">Listing</option>
-                    <option value="Trust and safety">Trust and safety</option>
-                    <option value="General question">General question</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="support-message">Message</label>
-                  <textarea
-                    id="support-message"
-                    name="message"
-                    placeholder="Tell us what you need help with."
-                  ></textarea>
-                </div>
-                <button class="button button-primary" type="submit">Send message</button>
-              </form>
-              <p class="message" id="support-feedback">Support responses will appear here after sending.</p>
-            </aside>
-          </div>
-        </section>
-
-        <section class="section reveal">
-          <div class="form-layout">
-            <div class="section-heading compact">
-              <p class="eyebrow">Early access</p>
-              <h2>Join the first neighborhood launch list.</h2>
-              <p class="muted">
-                Keep the first version simple: browse, save, request, and list. We will notify early users when the next neighborhood opens.
-                Keep the first version simple: browse, save, request, and list.
-                We will notify early users when the next neighborhood opens.
-              </p>
-            </div>
-            <form class="form-card" data-waitlist-form>
-              </div>
-              <div class="inline-actions">
-                <button class="button button-primary" type="submit">Join waitlist</button>
-                <a class="button button-secondary" href="./browse.html">Browse live items</a>
-                <a class="button button-secondary" href="#browse-section">Browse live items</a>
-              </div>
-              <p class="form-note" data-form-note>Waitlist confirmations will appear here.</p>
-            </form>
-          </div>
-        </section>
-
-        <section class="section reveal">
-          <div class="cta-panel">
-            <div>
-              <p class="eyebrow">Start simply</p>
-              <h2>Browse as a customer today, or list one item and test the loop yourself.</h2>
-            </div>
-            <div class="button-row">
-              <a class="button button-primary" href="./browse.html">Browse marketplace</a>
-              <a class="button button-secondary" href="./dashboard.html">Open dashboard</a>
-            </div>
-          </div>
-        </section>
-      </main>
-          <p>Built for practical neighborhoods, lighter spending, and fewer one-time purchases.</p>
-        </div>
-        <nav aria-label="Footer">
-          <a href="./index.html">Home</a>
-          <a href="./browse.html">Browse</a>
-          <a href="./how-it-works.html">How it Works</a>
-          <a href="./list-item.html">List an Item</a>
-          <a href="./support.html">Support</a>
-          <a href="#top">Home</a>
-          <a href="#browse-section">Browse</a>
-          <a href="#list-section">List an Item</a>
-          <a href="#dashboard-section">Dashboard</a>
-          <a href="#support-section">Support</a>
-        </nav>
-      </footer>
-    </div>
+function setupReveal() {
